@@ -1,0 +1,22 @@
+body {
+  background-color: #ecf0f1;
+}
+#title {
+  /* color: #34495e; */
+  transition: color 0.5s ease-in-out;
+  /*  색깔 바뀔때마다 전환효과를 줘보겠다 
+        JS 에 의해 클릭할때마다 clicked  클래스가 생겼다 사라졌다
+        하게 만들었으므로 이 전환이 일어날떄마다 효과를 준 것이다*/
+}
+.clicked {
+  color: #7f8c8d;
+}
+/* #titleA{
+   color: turquoise;
+} */
+.btn {
+  background-color: tomato;
+}
+.clickeda {
+  color: violet;
+}

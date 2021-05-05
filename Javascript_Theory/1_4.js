@@ -67,7 +67,7 @@ console.log(console);
 // 의미한다
 console.log(console,andyInfo);
 
-// 함수를 만드는 법!
+// 0503 함수를 만드는 법!
 // function sayHello(){
 //     console.log('Hello!');
 // }
@@ -106,7 +106,7 @@ console.log(greetSeongYunMin);
 const calculator={
     plus: function(a,b){
         return a+b;
-    },
+    },//컴머 중요하다
     minus: function(a,b){
         return a-b;
     },
@@ -135,6 +135,7 @@ console.log(title);
 // 즉 DOM 함수를 통해 원하는 html 태그를 가져다가 오브젝트로 만드는 것이다 그리고
 // 그 오브젝트에 원하는 key를 부여해서 원하는 기능을 하게 만들 것이다
 title.innerHTML  ="Hi! From JS";
+//여기서 title은 웨에서 만든 title이다
 // 앞으로 배울 많은 함수들, 오브젝트 내의 함수들은 DOM형태로 변경 가능하다
 console.dir(title);
 // dir함수를 통해 title로 할 수 있는 많은 것들을 볼 수 있다
@@ -151,3 +152,67 @@ const hello=document.querySelector(".hello");
     // Selector 와 똑같다
 console.log(hello);
 //html에 hello라는 클래스 네임을 가진 태그 없기 때문에 null이라고 출력된것이다
+const title2=document.querySelector('#title');
+console.log(title2);
+//이렇게 처음으로 나오는 #title의 내용을 가져온다
+
+// 0504
+// 기본적으로 자바스크립트는 웹사이트에서 발생하는 이벤트에 반응하기 위해서 만들어졌다
+// 물론 html, css를 수정할때도 사용가능하지만
+function handleResize(){
+    console.log("I have been resized");
+}
+window.addEventListener("resize",handleResize);
+// 여기서 handleResize()라고 쓰지 않는게 중요하다 괄호를 빼고 함수 이름만 적게되면
+// 그것은 내가 그 함수를 호출할 예정이라는 뜻이다 ()를 넣으면 지금 당장 호출하라는 뜻
+// 즉 우리는 함수를 바로 호출하는 것이 아니라 window가 resize됐을때 함수를 호춣하길
+// 원하므로 () 붙이면 안된다
+// 이렇게 하고 실행해보면 처음에는 아무것도 안 뜬다. 근데 창 사이즈를 변경해보면
+// handleResize함수 실행되는 것을 알 수 있다
+function handleResize(event){
+    console.log(event);
+}
+window.addEventListener("resize",handleResize(event));
+// 이렇게 handleResize함수에 event라는 객체를 인자로 넣고 창 사이즈 변할때마다
+// event객체 출력되게 했더니만 창이 변할때마다 콘솔창에 event객체가 호출된다
+function handleClick(){
+    title.style.color="blue";
+}
+title.addEventListener("click",handleClick);
+//이렇게 title이 click될때 handleClick 함수를 실행시켜 글자 색을 보라색으로 바꿀
+// 수도 있다 
+// if(conition){
+//     bock
+// }else{
+//     block
+// }
+// 이렇게 if else 구문을 사용하여 condition이 true일때 if 실행되도록 할 수 있다
+if(10===5){
+    // JS에서 ===는 C언어의 ==과 같은의미이다
+    console.log("hi");
+} else if(10>5) {
+    console.log("bye");
+} else {
+    console.log("no");
+}
+if(20>5 && "nicolas" === "nicolas"){
+    // &&는 왼쪽과 오른쪽이 모두 참이어야 true가 되어 if문 실행하도록 한다
+    // ||는 좌우중 하나만 true여도 실행하도록 한다
+    console.log("yeah");
+} else {
+    console.log("no");
+}
+
+const age=prompt("How old are you?");
+console.log(age);
+// prompt 는 브라우저에 팝업창 떠서 값을 입력하고 그 값을 age 변수에 넣는 함수이다
+// 실행해보면 알것 근데 이건 html로 예쁘게 만들 수 있어서 다음부턴 절대 쓰지 않읈것
+if(age>=22){
+    console.log("You can drink");
+} else if(age<22 && age>=18){
+    console.log("You can, but not reccommend");
+} else {
+    console.log("No!");
+}
+const titleee=document.querySelector("title");
+// 2_6강 부터는 다른 2_6html을 사용할 것이다 옮기겠음
