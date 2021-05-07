@@ -5,6 +5,7 @@ const clockContainer = document.querySelector(".js-clock"),
 // 항상 init 함수를 먼저 만들고 시작하자
 function getTime(){
     const date = new Date();
+    console.log(date);
     const minutes=date.getMinutes();
     const hours=date.getHours();
     const seconds=date.getSeconds();
@@ -38,6 +39,7 @@ function getTime(){
 // 시간 단위는 ms 단위이다 아래 init 함수에 setInterval 함수 넣어보자
 // ternary operator를 써보자 a>b ? XXX : YYY 이런 형식으로 쓰이는데
 // a>b가 참이면 XXX를 실행하고 거짓이면 YYY를 실행하는 연산자이다
+//`0$(hours)`는 문자열이다
 function init(){
     getTime();
     setInterval(getTime,1000);

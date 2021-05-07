@@ -1,0 +1,12 @@
+.form,
+.greetings {
+  display: none;
+}
+
+.showing {
+  display: block;
+}
+/* 로컬 스토리지에 이름이 저장돼있는지 여부에 따라
+    이름 입력창을 보여줄 건지 아니면 Hello 이름 창을 보여줄건지를
+    결정하기위해 디폴트값으로 form과 greeting 태그 모두 display: none을 해놓고
+    JS로 showing 태그를 remove또는 add 한다 */
