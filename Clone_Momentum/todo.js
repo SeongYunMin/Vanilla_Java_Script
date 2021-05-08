@@ -5,7 +5,49 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 // 쓴 변수명이기 떄문이다 다른 파일이어도 const이기 때문에 변수명은 갖게 해줄 수 없다  
 const TODOS_LS = "toDos"; 
 
-const toDos = [];
+let toDos = [];
+// toDos라는 어레이 만들었다
+// 아래에서 toDos에 cleanToDos를 넣을것이므로 바꿀 수 있는 변수를 선언할 때 쓰는 let을 쓰자
+
+
+function deleteTodo(event){
+    // console.log(event.target.parentNode);
+    // 이 event.target 객체를 쓰면 이 이벤트가 발생한 html태그를 콘솔창에 보여준다
+    // 근데 우리는 이 클릭이라는 이벤트가 발생한 태그를 delete 하려는 것이 아니라
+    // 이 버튼이 속해있는 li 엘레먼트 자체를 지워버릴 것이다 따라서 지우고자 하는 
+    // li의 id를 알아야 한다 .parentNode라는 객체를 써보자 
+    // 이렇게 하면 이 버튼 엘레먼트가 속해있는 li 엘레먼트 자체를 보여주게 된다
+    const btn = event.target;
+    const li = btn.parentNode;
+    toDoList.removeChild(li);
+    // 이렇게 클릭한 버튼 엘레먼트를 btn으로 지정하고 그 부모 엘레먼트를 li 변수에
+    // 지정하자 그리고 removeChild 함수를 써서 toDoList에서 그 li를 제거하도록 하자
+    const cleanToDos = toDos.filter(function(toDo){
+        // return toDo.id === 1;
+    // 2. 이렇게 function(toDo)함수는 return, 즉 반환값을 가진다. 즉 toDos 내의 객체의 id가
+    //     1 인 경우만 반환하고 나머지는 다 핋터링 한다는 뜻이다. 이렇게 .filter를 통해
+    //    우리가 원하는 객체만을 걸러낼 수 있다
+        return toDo.id !== parseInt(li.id);
+        // 4. 따라서 function(toDo)에서 toDo.id가 li.id와 다른 애들만 추려주면 된다
+        // 근데 toDo.id !== li.id; 조건을 이렇게만 하게 되면 toDo del 버튼 눌러서
+        // 제거해도 toDos 변하지 않는다. 그 이유는 toDo.it는 int이고 li.id는 string
+        // 이기 때문이다 따라서 li.id의 자료형을 int로 바꾸기 위해 parseInt()를 
+        // 사용한다
+    });
+    // 1. 아직 localStorage 에는 제거한 toDo 목록이 남아 있다 이 또한 제거해야 한다
+    // 이때 우리는 .filter를 쓸 수 있다. 이 .filter()는 어레이에 쓰이는 함수인데 
+    // .forEach처럼 어레이 내의 객체 각각에 괄호 안의 함수(여기서는 function(toDo))을 
+    // 먹일 수 있다. 위의 function(toDo)함수로 가보자
+    // 3. 이렇듯 toDos.filter는 function(toDo)이 걸러낸 아이템들로 다시 array를 만들어서
+    // 제시한다 
+    toDos = cleanToDos;
+    // 이렇게 toDos[].id !== li.id 인 오브젝트들로 꾸려진 cleanToDos를 toDos로 업데이트 해준다
+    saveToDos();
+    // 그리고 업데이트된 toDos를 다시 localStorage에 저장하자! 인제 완벽하게 delete가 됐다
+}
+
+
+
 
 function saveToDos(){
     localStorage.setItem(TODOS_LS,JSON.stringify(toDos));
@@ -19,12 +61,14 @@ function paintToDo(text){
     const span = document.createElement("span");
     const newId =  toDos.length + 1;
     delBtn.innerText="❌";
+    delBtn.addEventListener("click", deleteTodo);
+    // 이 eventlistner는 X버튼의 클릭을 감지해서 deleteTodo 함수를 실행한다
     span.innerText = text;
     // 이렇게 createElement를 사용해서 원하는 엘레먼트를 만들 수 있다
     // 여기서 text는 인자이다
-    li.id = newId; //이렇게 id 객체를 이용해서 li각각에 id를 부여하자 이렇게 해야 나중에 특정 리스트를 정확하게 조작 가능하다
-    li.appendChild(span);
+    li.id = newId; //이렇게 .id 객체를 이용해서 li각각에 id를 부여하자. 이렇게 해야 나중에 특정 리스트를 정확하게 조작 가능하다
     li.appendChild(delBtn);
+    li.appendChild(span);
     // 그리고 appendChild라는 함수를 통해 span과 delBtn을 li의 자식 엘러먼트로 넣을 수 있다
     toDoList.appendChild(li);
     // 그리고 그것을 html에 미리 만들어놨던 .js-toDoList 엘리먼트 
@@ -77,7 +121,7 @@ function loadToDos(){
         } )
         // 이 forEach는 parsedToDos 안에 있는 오브젝트 각각에 함수를 먹이게하는 역할을 한다
         // 여기서 임의로 설정한 인자 toDo자리에는 사실 parsedToDos 어레이 안에 있는 각각의 
-        // 오브젝트가 대입되어 함수가 실행된다
+        // 오브젝트가 대입되어 함수가 실행된다 parsedToDos[0].text,parsedToDos[1].text 등이 실행
         // 여기서는 paintToDo함수가 실행되게 하였는데 안에 인자로는 toDo.text를 넣었다
         // 즉 loadedStorage가 null이 아니면 JSON으로 localStorage에 저장돼있는 어레이를
         // 가져와서 parsedToDos에 대입하고 이 어레이의 오브젝트 하나하나에 paintToDo 함수를
