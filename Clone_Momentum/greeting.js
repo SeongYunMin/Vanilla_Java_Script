@@ -8,15 +8,15 @@ const form = document.querySelector(".js-form"),
     // localStorage.setItem()로 정보를 입력할 수 있고 .getitem()으로 정보를 가져온다
 //    로컬 스토리지는 URL에 기반을 둔다 URL 별로 각각 다른 local storage 가지는 것
    
-    // init 함수부터 읽어나가자
 const USER_LS="currentUser",    
     SHOWING_CN="showing";
-
+ // init 함수부터 읽어나가자
 function saveName(name){
-    localStorage.setItem("currentUser",name);
+    localStorage.setItem(USER_LS,name);
 }
 
 function handleSubmit(event){
+    // event 발생시 사용하는 함수이므로 인자에 event를 넣어준다
     event.preventDefault();
     // form에서 submit이라는 이벤트가 발생하면 브라우저는 디폴트로 이 입력된 값을
     // 어딘가로 보내고 싶어한다 따라서 입력하고 엔터치면 입력된 값 사라지고 브라우저 새로고침 되는것
