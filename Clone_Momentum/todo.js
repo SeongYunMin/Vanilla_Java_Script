@@ -14,9 +14,9 @@ function deleteTodo(event){
     // console.log(event.target.parentNode);
     // 이 event.target 객체를 쓰면 이 이벤트가 발생한 html태그를 콘솔창에 보여준다
     // 근데 우리는 이 클릭이라는 이벤트가 발생한 태그를 delete 하려는 것이 아니라
-    // 이 버튼이 속해있는 li 엘레먼트 자체를 지워버릴 것이다 따라서 지우고자 하는 
+    // 이 버튼 태그가 속해있는 li 엘레먼트 자체를 지워버릴 것이다 따라서 지우고자 하는 
     // li의 id를 알아야 한다 .parentNode라는 객체를 써보자 
-    // 이렇게 하면 이 버튼 엘레먼트가 속해있는 li 엘레먼트 자체를 보여주게 된다
+    // 이렇게 하면 이 버튼 엘레먼트가 속해있는 부모 엘레먼트 자체를 보여주게 된다
     const btn = event.target;
     const li = btn.parentNode;
     toDoList.removeChild(li);

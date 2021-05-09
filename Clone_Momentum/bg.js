@@ -1,13 +1,13 @@
 const body = document.querySelector("body");
 
 
-// Math.random()라는 오브젝트를 이용하면 랜덤한 수를 얻을 수 있다 
+// Math.random()라는 오브젝트를 이용하면 랜덤한 실수를 얻을 수 있다 
 // 근데 얘는 0에서 1사이의 소수로다가 난수를 뽑아낸다 우리는 1~5사이의 정수를 뽑아내야한다
 // (이미지가 5개이기 때문)
 // 그때 쓰는 것이 Math.floor이다 floor, 말그대로 바닥이라는 뜻이다, 즉 버림을 의미한다
 // ceiling은  올림이다
 // random 함수만 쓰면 0~1사이 실수 형태의 난수를 추출하므로 5이하의 난수를 얻으려면
-// Math.random * 6 이렇게 5을 곱해주면 된다
+// Math.random * 5 이렇게 5을 곱해주면 된다
 const IMG_NUMBER = 5;
 
 
