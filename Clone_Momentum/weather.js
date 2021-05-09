@@ -5,7 +5,7 @@ const API_KEY = "8301ae4f26d8f2a8ae02c633907a7e66";
 // openweather 사이트에서 받아온 api 키이다
 // api는 다른 서버로부터 데이터를 손쉽게 가져올 수 있는 수단이다
 // 잡사스크립트가 강력한 이유는 실시간으로 다른 웹사이트로부터 데이터를 가져와서 내 페이지에
-// 반영할 수 있기 때문이다 새로고침할 필요 없다
+// 반영할 수 있기 때문이다 새로고침할 필요가 없다
 const COORDS='coords';
 
 function getWeather(lat, lng){
@@ -15,7 +15,7 @@ function getWeather(lat, lng){
     // 못하도록 제한을 두기 위해 필요한 것이다
     // https:// 랑 백택을 까먹으면 안된다
     // 그리고 중요한게 이 api를 배포하는 사이트로 가보면 units of measurement 항목이 있다
-    // 거기서 보면 온도단위의 디폴트값이 켈빈임을 알 수 있다 이를 celcius로 바꾸려면 units=metric
+    // 거기서 보면 온도단위의 디폴트값이 켈빈임을 알 수 있다 이를 celcius로 바꾸려면 &units=metric
     // 을 url주소 뒤에다가 붙여주면 된다
     fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
@@ -28,7 +28,7 @@ function getWeather(lat, lng){
         const place = json.name;
         weather.innerText = `${temperature}°C @ ${place}`;
     });
-    // .then() 객체는 말그대로 fetch로 데이터를 받은 후에(then) 괄호 안의 함수를 실행시키는
+    // .then() 객체는 말그대로 fetch로 부터 데이터를 받은 후에(then) 괄호 안의 함수를 실행시키는
     // 객체이다 이렇게 then 쓰는 이유는 우리는 fetch가 완벽하게 된 후에 다음 작업을 하길 원하기 때문
     // then 을 사용하지 않는다면 데이터가 들어오기도 전에 다음 코드가 실행돼 그 데이터 쓸 수 없게 될 수도 있다
     // 우리가 원하는 데이터는 개발자 도구의 네트워크 배너 안의 response 에 들어있는 stringify 된
@@ -43,7 +43,7 @@ function saveCoords(coordsObj){
 }
 
 function handleGeoSuccess(position){
-    // console.log(position); 
+    console.log(position); 
     // 이렇게 하면 콘솔창에 geo 정보가 나온다
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
@@ -66,7 +66,7 @@ function handleGeoError(){
 function askForCoords(){
     // navigator라는 API를 써보자 지금까지 써왔던 api 중엔 window 등이 있다
     navigator.geolocation.getCurrentPosition(handleGeoSuccess, handleGeoError);
-    // 이 navigation의 객체 중 하나인 geolocation은 gps 정보를 가져오는 역할 을 하고
+    // 이 navigator의 객체 중 하나인 geolocation은 gps 정보를 가져오는 역할 을 하고
     // getCurrentPosition함수는 현재위치 가져오는 역할을 한다 이 함수의 requirements는
     // 2개이다 하나는 geo정보를 성공적으로 가져왔을때, 하나는 못 가져왔을때 이다
 }
